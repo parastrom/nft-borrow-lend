@@ -1,12 +1,4 @@
 use anchor_lang::prelude::*;
-use borsh::{BorshDeserialize, BorshSerialize};
-
-#[derive(BorshSerialize, BorshDeserialize, Clone, Copy)]
-pub enum OfferStatus {
-    Taken,
-    NotTaken,
-}
-
 
 #[account]
 pub struct Offer {
@@ -23,7 +15,7 @@ pub struct Offer {
     pub lender: Pubkey,
 
     /// Loan Taken:
-    pub is_loan_taken: OfferStatus,
+    pub is_loan_taken: bool,
 
     /// Borrower
     pub borrower: Pubkey,

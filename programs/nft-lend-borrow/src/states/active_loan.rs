@@ -1,18 +1,4 @@
 use anchor_lang::prelude::*;
-use borsh::{BorshDeserialize, BorshSerialize};
-
-#[derive(BorshSerialize, BorshDeserialize, Clone, Copy)]
-pub enum LiquidationStatus {
-    HasMargin, 
-    Liquidated,
-}
-
-#[derive(BorshSerialize, BorshDeserialize, Clone, Copy)]
-pub enum RepaymentStatus {
-    NotYet,
-    Repaid,
-}
-
 
 #[account]
 pub struct ActiveLoan {
@@ -34,16 +20,16 @@ pub struct ActiveLoan {
     pub mint: Pubkey,
 
     /// Timestamp of loan taken
-    pub loan_ts: u64,
+    pub loan_ts: i64,
 
     /// Repayment Timestamp
-    pub repay_ts: u64,
+    pub repay_ts: i64,
 
     /// Repaid
-    pub is_repaid: RepaymentStatus,
+    pub is_repaid: bool,
     
     /// Liquidated
-    pub is_liquidated: LiquidationStatus,
+    pub is_liquidated: bool,
     
     /// Bump
     pub bump: u8,
@@ -52,5 +38,5 @@ pub struct ActiveLoan {
 
 impl ActiveLoan {
     /// Length of Active Loan Struct
-    pub const LEN: usize = 8 + 32 +  32 + 32 + 32 + 8 + 8 + 1 + 1 + 1;
+    pub const LEN: usize = 8 + 32 +  32 + 32 + 32 + 32 + 8 + 8 + 1 + 1 + 1;
 }
